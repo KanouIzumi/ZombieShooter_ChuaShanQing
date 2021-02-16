@@ -6,9 +6,11 @@ using UnityEngine.AI;
 
 public class Enemy_Controller : MonoBehaviour
 {
+    public static Enemy_Controller instance;
 
     public GameObject scoreText;
     public static int score;
+    public static int coin;
     public float dist;
     public Animator EnemyAnim;
 
@@ -58,10 +60,8 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            //score =+ 5;
-            //score = +5;
             score += 5;
-
+            coin += 5;
             EnemyAnim.SetTrigger("ZombieDead");
             Destroy(collision.gameObject);
             Debug.Log("Hit");

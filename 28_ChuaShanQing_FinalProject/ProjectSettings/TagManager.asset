@@ -8,6 +8,7 @@ TagManager:
   - Zombie
   - Wall
   - Bullet
+  - HPRe
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class GameManager_Controller : MonoBehaviour
 
     public GameObject EnermyPrefab;
     public int numberOfSpawn;
+    public float spwanInterval;
 
     public Transform[] spwanPointArr;
 
@@ -31,15 +32,17 @@ public class GameManager_Controller : MonoBehaviour
         //This code is for the random spawn
         for (int i = 0; i < numberOfSpawn; i++)
         {
-            //Vector3 randomPos = new Vector3(Random.Range(-50, 50), 0.5f, Random.Range(-50, 50));
-            int randomIndex = Random.Range(0, spwanPointArr.Length);
-            Vector3 randomPos = spwanPointArr[randomIndex].position;
+            ////Vector3 randomPos = new Vector3(Random.Range(-50, 50), 0.5f, Random.Range(-50, 50));
+            //int randomIndex = Random.Range(0, spwanPointArr.Length);
+            //Vector3 randomPos = spwanPointArr[randomIndex].position;
 
-            // A chance of 50% //
-            if (Random.Range(0, 2) < 1)
-            {
-                Instantiate(EnermyPrefab, randomPos, Quaternion.identity);
-            }
+            //// A chance of 50% //
+            //if (Random.Range(0, 2) < 1)
+            //{
+            //    Instantiate(EnermyPrefab, randomPos, Quaternion.identity);
+            //}
+
+            StartCoroutine(WaitAndSpawn(spwanInterval));
 
         }
     }
@@ -67,6 +70,17 @@ public class GameManager_Controller : MonoBehaviour
         {
             timerCount = 60.0f;
             isStartCount = false;
+        }
+    }
+
+    private IEnumerator WaitAndSpawn(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime);
+            int randomIndex = Random.Range(0, spwanPointArr.Length);
+            Vector3 randomPos = spwanPointArr[randomIndex].position;
+            Instantiate(EnermyPrefab, randomPos, Quaternion.identity);
         }
     }
 }
