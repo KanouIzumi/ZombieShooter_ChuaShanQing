@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Bullet
   - HPRe
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -10,13 +10,11 @@ public class Enemy_Controller : MonoBehaviour
 
     public GameObject scoreText;
     public static int score;
-    public static int coin;
     public float dist;
     public Animator EnemyAnim;
 
     private NavMeshAgent navMeshAgent;
     private GameObject character;
-
 
 
     // Start is called before the first frame update
@@ -61,7 +59,6 @@ public class Enemy_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             score += 5;
-            coin += 5;
             EnemyAnim.SetTrigger("ZombieDead");
             Destroy(collision.gameObject);
             Debug.Log("Hit");

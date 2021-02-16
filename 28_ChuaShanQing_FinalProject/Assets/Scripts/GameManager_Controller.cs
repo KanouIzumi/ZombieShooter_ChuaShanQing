@@ -8,6 +8,7 @@ public class GameManager_Controller : MonoBehaviour
     public static GameManager_Controller instance;
 
     public GameObject EnermyPrefab;
+    public GameObject coinPrefab;
     public int numberOfSpawn;
     public float spwanInterval;
 

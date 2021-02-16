@@ -15,7 +15,7 @@ public class Player_Controller : MonoBehaviour
     bool IsAlive = true;
 
     //Ammo
-    float reloadTime = 3.0f;
+    float reloadTime = 2.0f;
     bool canShoot = true;
     bool isRealoding;
 
@@ -87,6 +87,8 @@ public class Player_Controller : MonoBehaviour
             {
                 bulletAmount--;
                 bulletText.GetComponent<Text>().text = "Bullet Left: " + bulletAmount.ToString();
+                audioSource.PlayOneShot(AudioClipBGMArr[0]);
+                audioSource.PlayOneShot(AudioClipBGMArr[1]);
                 Instantiate(bulletPrefab, bulletSpawn.transform.position, transform.rotation);
                 playerAnim.SetTrigger("ShootTrigger");
             }
@@ -94,6 +96,7 @@ public class Player_Controller : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R) && isRealoding == false)
             {
                 StartCoroutine(Reload());
+                audioSource.PlayOneShot(AudioClipBGMArr[2]);
                 return;
             }
            
