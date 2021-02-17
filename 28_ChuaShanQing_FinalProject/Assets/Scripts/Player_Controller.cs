@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -128,8 +129,6 @@ public class Player_Controller : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Zombie") && IsAlive == true)
         {
-            Debug.Log("NO");
-
             health -=1;
             healthPointText.GetComponent<Text>().text = "Health: " + health.ToString();
 
@@ -138,9 +137,24 @@ public class Player_Controller : MonoBehaviour
                 healthPointText.GetComponent<Text>().text = "Health: 0" + health.ToString();
                 IsAlive = false;
                 playerAnim.SetTrigger("DeathTrigger");
+
+                SceneManager.LoadScene("You Lose");
             }
         }
 
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("HPRe"))
+        {
+            Debug.Log("Healing");
+            if (health < 10)
+            {
+                health++;
+                healthPointText.GetComponent<Text>().text = "Health: " + health.ToString();
+            }
+        }
     }
 
 

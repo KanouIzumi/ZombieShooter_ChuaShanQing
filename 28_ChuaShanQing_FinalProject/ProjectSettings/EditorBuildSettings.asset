@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/InstructionsScene.unity
     guid: 9a3fd6a8e9205ee48af845eeef838575
   - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/CreditScene.unity
     guid: ee39e16e01e489a42a5c26e9ed92f916
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/You Win.unity
+    guid: 12cdce74fb61a68468e53df48c741bfe
+  - enabled: 1
+    path: Assets/Scenes/You Lose.unity
+    guid: 608d6be066e3b224488ede0e5001a900
   m_configObjects: {}

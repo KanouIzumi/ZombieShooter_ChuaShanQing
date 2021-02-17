@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager_Controller : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager_Controller : MonoBehaviour
     public GameObject coinPrefab;
     public int numberOfSpawn;
     public float spwanInterval;
+
+    float winScore = 4;
 
     public Transform[] spwanPointArr;
 
@@ -33,18 +36,17 @@ public class GameManager_Controller : MonoBehaviour
         //This code is for the random spawn
         for (int i = 0; i < numberOfSpawn; i++)
         {
-            ////Vector3 randomPos = new Vector3(Random.Range(-50, 50), 0.5f, Random.Range(-50, 50));
-            //int randomIndex = Random.Range(0, spwanPointArr.Length);
-            //Vector3 randomPos = spwanPointArr[randomIndex].position;
+            //Vector3 randomPos = new Vector3(Random.Range(-50, 50), 0.5f, Random.Range(-50, 50));
+            int randomIndex = Random.Range(0, spwanPointArr.Length);
+            Vector3 randomPos = spwanPointArr[randomIndex].position;
 
-            //// A chance of 50% //
+            // A chance of 50% //
             //if (Random.Range(0, 2) < 1)
             //{
             //    Instantiate(EnermyPrefab, randomPos, Quaternion.identity);
             //}
 
             StartCoroutine(WaitAndSpawn(spwanInterval));
-
         }
     }
 
@@ -54,6 +56,12 @@ public class GameManager_Controller : MonoBehaviour
         if (isStartCount == true)
         {
             timerCountDown();
+        }
+
+        //Win conditions
+        if (Enemy_Controller.score == winScore  || timeCountInt==0)
+        {
+            Debug.Log("You Win");
         }
 
     }

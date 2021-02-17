@@ -58,12 +58,13 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            score += 5;
+            score += 1;
             EnemyAnim.SetTrigger("ZombieDead");
+
             Destroy(collision.gameObject);
             Debug.Log("Hit");
-
-            Destroy(gameObject, 5);
+            navMeshAgent.speed = 0f;
+            Destroy(gameObject, 2);
         }
     }
 }
