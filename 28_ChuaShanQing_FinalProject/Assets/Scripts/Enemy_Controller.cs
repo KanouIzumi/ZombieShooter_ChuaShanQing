@@ -87,6 +87,7 @@ public class Enemy_Controller : MonoBehaviour
     {
         if(enemyHP <=0 && coinDrop ==false)
         {
+            Instantiate(coinPrefab, coinSpawn.transform.position, Quaternion.identity);
             coinDrop = true;
         }
     }
