@@ -47,7 +47,7 @@ public class Player_Controller : MonoBehaviour
         {
             Movement();
 
-            if (Input.GetMouseButtonDown(0) && bulletAmount>0 && canShoot == true) //Shoot
+            if (Input.GetKeyDown(KeyCode.Space) && bulletAmount>0 && canShoot == true) //Shoot
             {
                 bulletAmount--;
                 bulletText.GetComponent<Text>().text = "Bullet Left: " + bulletAmount.ToString();
@@ -63,7 +63,18 @@ public class Player_Controller : MonoBehaviour
                 audioSource.PlayOneShot(AudioClipBGMArr[2]);
                 return;
             }
-           
+
+            if (health == 0)
+            {
+                audioSource.PlayOneShot(AudioClipBGMArr[5]);
+                healthPointText.GetComponent<Text>().text = "Health: 0" + health.ToString();
+                IsAlive = false;
+                playerAnim.SetTrigger("DeathTrigger");
+
+                //Lose condition
+                SceneManager.LoadScene("You Lose");
+            }
+
         }
 
         else
@@ -92,17 +103,6 @@ public class Player_Controller : MonoBehaviour
             healthPointText.GetComponent<Text>().text = "Health: " + health.ToString();
 
             audioSource.PlayOneShot(AudioClipBGMArr[4]);
-
-            if (health == 0)
-            {
-                audioSource.PlayOneShot(AudioClipBGMArr[5]);
-                healthPointText.GetComponent<Text>().text = "Health: 0" + health.ToString();
-                IsAlive = false;
-                playerAnim.SetTrigger("DeathTrigger");
-
-                //Lose condition
-                SceneManager.LoadScene("You Lose");
-            }
         }
 
         if (collision.gameObject.CompareTag("Coin"))

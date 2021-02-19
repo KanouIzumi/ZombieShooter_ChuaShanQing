@@ -6002,7 +6002,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7ad53bbae297c45bfaa60fc6648f22bc, type: 3}
   - {fileID: 8300000, guid: 756c4e23e8553954fa91b4cc2936afa0, type: 3}
   playerAnim: {fileID: 811587536}
-  playerRb: {fileID: 0}
+  playerRb: {fileID: 811587534}
   bulletPrefab: {fileID: 3320641064301802952, guid: 3ca0d6364a52b7d40bc84c8b1f9be4a3,
     type: 3}
   bulletSpawn: {fileID: 925199048}
@@ -7923,8 +7923,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 0}
-  isGlobal: 0
+  sharedProfile: {fileID: 11400000, guid: 31d13e9f39f9ed0459e8ce867197f77f, type: 2}
+  isGlobal: 1
   blendDistance: 0
   weight: 1
   priority: 0
@@ -7943,7 +7943,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 963194228}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -11649,7 +11649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23dea6a5cd0dfff4f8aca23f50316d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 2092869996}
 --- !u!1 &1517748107
 GameObject:
   m_ObjectHideFlags: 0
@@ -13593,6 +13593,7 @@ GameObject:
   - component: {fileID: 1928967973}
   - component: {fileID: 1928967972}
   - component: {fileID: 1928967971}
+  - component: {fileID: 1928967974}
   m_Layer: 5
   m_Name: Back To Menu
   m_TagString: Untagged
@@ -13662,7 +13663,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1928967972}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1928967974}
+        m_MethodName: GoToStartScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1928967972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13700,6 +13712,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928967969}
   m_CullTransparentMesh: 0
+--- !u!114 &1928967974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928967969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23dea6a5cd0dfff4f8aca23f50316d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 2092869996}
 --- !u!1 &1929805951
 GameObject:
   m_ObjectHideFlags: 0
