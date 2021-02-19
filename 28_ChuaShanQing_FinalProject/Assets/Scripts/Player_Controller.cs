@@ -122,10 +122,6 @@ public class Player_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            //Debug.Log("Hello");
-        }
 
         if (collision.gameObject.CompareTag("Zombie") && IsAlive == true)
         {

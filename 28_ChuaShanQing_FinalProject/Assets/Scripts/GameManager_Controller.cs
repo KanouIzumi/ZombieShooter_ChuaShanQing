@@ -13,7 +13,10 @@ public class GameManager_Controller : MonoBehaviour
     public int numberOfSpawn;
     public float spwanInterval;
 
-    float winScore = 4;
+    public static GameObject coinText;
+    public static int coinCount = 0;
+
+    float winScore = 30;
 
     public Transform[] spwanPointArr;
 
@@ -32,6 +35,7 @@ public class GameManager_Controller : MonoBehaviour
         {
             instance = this;
         }
+
 
         //This code is for the random spawn
         for (int i = 0; i < numberOfSpawn; i++)

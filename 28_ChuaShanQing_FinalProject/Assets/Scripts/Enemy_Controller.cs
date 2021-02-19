@@ -8,22 +8,29 @@ public class Enemy_Controller : MonoBehaviour
 {
     public static Enemy_Controller instance;
 
+    float enemyHP = 1;
     public GameObject scoreText;
     public static int score;
     public float dist;
     public Animator EnemyAnim;
 
+    public GameObject coinPrefab;
+    public GameObject coinSpawn;
+
     private NavMeshAgent navMeshAgent;
     private GameObject character;
+    private BoxCollider boxCollider;
 
-
+    bool coinDrop;
     // Start is called before the first frame update
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
-
+        boxCollider = GetComponent<BoxCollider>();
         scoreText = GameObject.Find("Score");
         character = GameObject.FindGameObjectWithTag("Player");
+        coinSpawn = GameObject.FindGameObjectWithTag("CoinSpawn");
+        coinPrefab = GameObject.FindGameObjectWithTag("Coin");
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.SetDestination(character.transform.position);
@@ -49,6 +56,13 @@ public class Enemy_Controller : MonoBehaviour
 
         }
 
+        if (enemyHP == 0)
+        {
+            navMeshAgent.speed = 0f;
+            boxCollider.enabled = false;
+            coinDropper();
+        }
+
         scoreText.GetComponent<Text>().text = "Score: " + score.ToString();
     }
 
@@ -59,12 +73,19 @@ public class Enemy_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             score += 1;
-            EnemyAnim.SetTrigger("ZombieDead");
-
+            enemyHP -= 1;
             Destroy(collision.gameObject);
-            Debug.Log("Hit");
-            navMeshAgent.speed = 0f;
+            EnemyAnim.SetTrigger("ZombieDead");
             Destroy(gameObject, 2);
+        }
+    }
+
+    private void coinDropper()
+    {
+        if(enemyHP <=0 && coinDrop ==false)
+        {
+            Instantiate(coinPrefab, coinSpawn.transform.position, transform.rotation);
+            coinDrop = true;
         }
     }
 }
