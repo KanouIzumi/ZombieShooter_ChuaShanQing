@@ -134,8 +134,15 @@ public class Player_Controller : MonoBehaviour
                 IsAlive = false;
                 playerAnim.SetTrigger("DeathTrigger");
 
+                //Lose condition
                 SceneManager.LoadScene("You Lose");
             }
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            print("Got Coin");
+            Destroy(collision.gameObject);
         }
 
     }

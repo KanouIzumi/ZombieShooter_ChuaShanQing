@@ -18,13 +18,4 @@ public class Coin_Controller : MonoBehaviour
         transform.Rotate(new Vector3(SpinSpeed * Time.deltaTime, 0, 0));
     }
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            print("Got Coin");
-            Destroy(gameObject);
-        }
-    }
 }
