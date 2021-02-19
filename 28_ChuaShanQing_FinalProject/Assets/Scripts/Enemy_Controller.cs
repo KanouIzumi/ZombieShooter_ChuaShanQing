@@ -17,6 +17,7 @@ public class Enemy_Controller : MonoBehaviour
     public GameObject coinPrefab;
     public GameObject coinSpawn;
 
+    private AudioSource audioSource;
     private NavMeshAgent navMeshAgent;
     private GameObject character;
     private BoxCollider boxCollider;
@@ -25,6 +26,7 @@ public class Enemy_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         EnemyAnim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
         scoreText = GameObject.Find("Score");
@@ -74,9 +76,10 @@ public class Enemy_Controller : MonoBehaviour
         {
             score += 1;
             enemyHP -= 1;
+            audioSource.Play();
             Destroy(collision.gameObject);
             EnemyAnim.SetTrigger("ZombieDead");
-            Destroy(gameObject, 2);
+            Destroy(gameObject, 3.5f);
         }
     }
 
