@@ -8,17 +8,15 @@ public class GameManager_Controller : MonoBehaviour
 {
     public static GameManager_Controller instance;
 
+    //This is for spawning the enemy
+    public Transform[] spwanPointArr;
     public GameObject EnermyPrefab;
-    public GameObject coinPrefab;
     public int numberOfSpawn;
     public float spwanInterval;
 
-    public static GameObject coinText;
-    public static int coinCount = 0;
 
     float winScore = 30;
 
-    public Transform[] spwanPointArr;
 
     //Timer
     int timeCountInt;
@@ -63,10 +61,11 @@ public class GameManager_Controller : MonoBehaviour
         }
 
         //Win conditions
-        if (Enemy_Controller.score == winScore  || timeCountInt==0)
+        if (Enemy_Controller.score == winScore || timeCountInt == 0)
         {
-            Debug.Log("You Win");
+            SceneManager.LoadScene("You Win");
         }
+
 
     }
 

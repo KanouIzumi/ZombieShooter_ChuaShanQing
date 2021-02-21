@@ -36,6 +36,7 @@ public class PauseMune_Controller : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        BGM_Controller.audioSource.Stop();
     }
 
     public void ResumeGame()
@@ -43,6 +44,7 @@ public class PauseMune_Controller : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        BGM_Controller.audioSource.Play();
     }
 
     public void GoToStartScreen()

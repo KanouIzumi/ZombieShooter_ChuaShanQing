@@ -8,15 +8,17 @@ public class Enemy_Controller : MonoBehaviour
 {
     public static Enemy_Controller instance;
 
-    float enemyHP = 1;
     public GameObject scoreText;
     public static int score;
-    public float dist;
-    public Animator EnemyAnim;
 
+    //This is for the coin object
     public GameObject coinPrefab;
     public GameObject coinSpawn;
 
+    //This is for the enemy object
+    float enemyHP = 1;
+    public float dist;
+    public Animator EnemyAnim;
     private AudioSource audioSource;
     private NavMeshAgent navMeshAgent;
     private GameObject character;
@@ -26,11 +28,14 @@ public class Enemy_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //This is for the enemy object
         audioSource = GetComponent<AudioSource>();
         EnemyAnim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
         scoreText = GameObject.Find("Score");
         character = GameObject.FindGameObjectWithTag("Player");
+
+        //This is for the coin object
         coinSpawn = GameObject.FindGameObjectWithTag("CoinSpawn");
         coinPrefab = GameObject.FindGameObjectWithTag("Coin");
 
@@ -41,29 +46,27 @@ public class Enemy_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navMeshAgent.SetDestination(character.transform.position);
+        //navMeshAgent.SetDestination(character.transform.position);
 
         dist = Vector3.Distance(character.transform.position, transform.position);
         if (dist <= 10)
         {
 
             navMeshAgent.SetDestination(character.transform.position);
+            EnemyAnim.SetFloat("Run Speed", 3.5f);
             EnemyAnim.SetBool("NearPlayer", true);
         }
 
         else if (dist >= 10)
         {
             navMeshAgent.SetDestination(this.transform.position);
+            EnemyAnim.SetFloat("Run Speed", 0);
             EnemyAnim.SetBool("NearPlayer", false);
 
         }
 
-        if (enemyHP == 0)
-        {
-            navMeshAgent.speed = 0f;
-            boxCollider.enabled = false;
-            coinDropper();
-        }
+        Enemydies();
+        coinDropper();
 
         scoreText.GetComponent<Text>().text = "Score: " + score.ToString();
     }
@@ -79,7 +82,6 @@ public class Enemy_Controller : MonoBehaviour
             audioSource.Play();
             Destroy(collision.gameObject);
             EnemyAnim.SetTrigger("ZombieDead");
-            Destroy(gameObject, 3.5f);
         }
     }
 
@@ -89,6 +91,17 @@ public class Enemy_Controller : MonoBehaviour
         {
             Instantiate(coinPrefab, coinSpawn.transform.position, Quaternion.identity);
             coinDrop = true;
+        }
+    }
+
+
+    private void Enemydies()
+    {
+        if (enemyHP <= 0)
+        {
+            navMeshAgent.speed = 0f;
+            boxCollider.enabled = false;
+            Destroy(gameObject, 3.5f);
         }
     }
 }

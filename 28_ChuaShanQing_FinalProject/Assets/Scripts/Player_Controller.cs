@@ -6,11 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
+    //This is for the bullet count
     int bulletAmount = 10;
     int maxBullet = 10;
+    public GameObject bulletPrefab;
+    public GameObject bulletSpawn;
+    public GameObject bulletText;
+
+    //This is for walking 
     public float walkSpeed;
     public float rotateSpeed;
-    public float health;
     public float damageRate;
 
     bool IsAlive = true;
@@ -22,14 +27,18 @@ public class Player_Controller : MonoBehaviour
 
     private AudioSource audioSource;
     public AudioClip[] AudioClipBGMArr;
-
     public Animator playerAnim;
     public Rigidbody playerRb;
 
-    public GameObject bulletPrefab;
-    public GameObject bulletSpawn;
-    public GameObject bulletText;
+    //This is the life points of the player
+    public float health;
     public GameObject healthPointText;
+
+    //This is for the coin
+    public GameObject coinText;
+    public int coinCount;
+
+    public float waitTime;
 
 
     // Start is called before the first frame update
@@ -38,6 +47,7 @@ public class Player_Controller : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         healthPointText.GetComponent<Text>().text = "Health: " + health.ToString();
+        coinText.GetComponent<Text>().text = "Coin: " + coinCount.ToString();
     }
 
     // Update is called once per frame
@@ -57,22 +67,11 @@ public class Player_Controller : MonoBehaviour
                 playerAnim.SetTrigger("ShootTrigger");
             }
 
-            if (Input.GetKeyDown(KeyCode.R) && isRealoding == false)
+            if (Input.GetKeyDown(KeyCode.R) && isRealoding == false) //Reloading
             {
                 StartCoroutine(Reload());
                 audioSource.PlayOneShot(AudioClipBGMArr[2]);
                 return;
-            }
-
-            if (health == 0)
-            {
-                audioSource.PlayOneShot(AudioClipBGMArr[5]);
-                healthPointText.GetComponent<Text>().text = "Health: 0" + health.ToString();
-                IsAlive = false;
-                playerAnim.SetTrigger("DeathTrigger");
-
-                //Lose condition
-                SceneManager.LoadScene("You Lose");
             }
 
         }
@@ -84,7 +83,7 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-    IEnumerator Reload()
+    IEnumerator Reload() //This is for the realoading of the gun
     {
         isRealoding = true;
 
@@ -97,17 +96,30 @@ public class Player_Controller : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.CompareTag("Zombie") && IsAlive == true)
+        if (collision.gameObject.CompareTag("Zombie") && IsAlive == true) //Getting hurt by the enemies
         {
             health -=1;
             healthPointText.GetComponent<Text>().text = "Health: " + health.ToString();
-
             audioSource.PlayOneShot(AudioClipBGMArr[4]);
+
+            if (health == 0)
+            {
+                audioSource.PlayOneShot(AudioClipBGMArr[5]);
+                healthPointText.GetComponent<Text>().text = "Health: " + health.ToString();
+                print("You died");
+                playerAnim.SetTrigger("DeathTrigger");
+                StartCoroutine(WaitToChangeScene(waitTime));
+                //SceneManager.LoadScene("You Lose");
+            }
         }
+
 
         if (collision.gameObject.CompareTag("Coin"))
         {
             print("Got Coin");
+            coinCount++;
+            coinText.GetComponent<Text>().text = "Coin: " + coinCount.ToString();
+            audioSource.PlayOneShot(AudioClipBGMArr[7]);
             Destroy(collision.gameObject);
         }
 
@@ -115,7 +127,7 @@ public class Player_Controller : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("HPRe"))
+        if (collision.gameObject.CompareTag("HPRe")) //This is when player step into the healing area
         {
             Debug.Log("Healing");
             if (health < 10)
@@ -190,5 +202,22 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    //This is to wait for awhile  to change scene
+    private IEnumerator WaitToChangeScene(float waitTime)
+    {
+        while (true)
+        {
+            IsAlive = false;
+
+            yield return new WaitForSeconds(waitTime);
+            SceneManager.LoadScene("You Lose");
+        }
+    }
+
+
+    private void BuyBullets()
+    {
+
+    }
 
 }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BGM_Controller : MonoBehaviour
 {
-    private AudioSource audioSource;
+    public static BGM_Controller instance;
+
+    public static AudioSource audioSource;
     private float volumeChangeSpeed = 1;
     // Start is called before the first frame update
     void Start()
