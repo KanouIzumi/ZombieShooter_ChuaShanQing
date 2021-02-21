@@ -74,6 +74,7 @@ public class Player_Controller : MonoBehaviour
                 return;
             }
 
+
         }
 
         else
@@ -109,7 +110,6 @@ public class Player_Controller : MonoBehaviour
                 print("You died");
                 playerAnim.SetTrigger("DeathTrigger");
                 StartCoroutine(WaitToChangeScene(waitTime));
-                //SceneManager.LoadScene("You Lose");
             }
         }
 
