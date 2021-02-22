@@ -20,7 +20,7 @@ public class GameManager_Controller : MonoBehaviour
 
     //Timer
     int timeCountInt;
-    float timerCount = 100;
+    float timerCount = 70;
     bool isStartCount;
     public GameObject timerTextGO;
 
@@ -80,7 +80,7 @@ public class GameManager_Controller : MonoBehaviour
 
         else if (timerCount < 1)
         {
-            timerCount = 60.0f;
+            timerCount = 70.0f;
             isStartCount = false;
         }
     }
