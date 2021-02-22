@@ -671,11 +671,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
-  dist: 0
-  EnemyAnim: {fileID: 6970990075512616747}
   coinPrefab: {fileID: 3791035851240515989, guid: b11fabbd8bd39ca44a75082d34eab626,
     type: 3}
   coinSpawn: {fileID: 986246111665557048}
+  dist: 0
+  EnemyAnim: {fileID: 6970990075512616747}
 --- !u!195 &6981342288633972488
 NavMeshAgent:
   m_ObjectHideFlags: 0

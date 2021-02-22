@@ -13,6 +13,10 @@ public class Player_Controller : MonoBehaviour
     public GameObject bulletSpawn;
     public GameObject bulletText;
 
+    //This is for buying bullet
+    public GameObject buyBullettxt;
+    public int maxBulletBuy = 5;
+
     //This is for walking 
     public float walkSpeed;
     public float rotateSpeed;
@@ -74,6 +78,7 @@ public class Player_Controller : MonoBehaviour
                 return;
             }
 
+            BuyBullets();
 
         }
 
@@ -117,7 +122,7 @@ public class Player_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Coin"))
         {
             print("Got Coin");
-            coinCount++;
+            coinCount += 2;
             coinText.GetComponent<Text>().text = "Coin: " + coinCount.ToString();
             audioSource.PlayOneShot(AudioClipBGMArr[7]);
             Destroy(collision.gameObject);
@@ -217,7 +222,14 @@ public class Player_Controller : MonoBehaviour
 
     private void BuyBullets()
     {
-
+        if(Input.GetKeyDown(KeyCode.B) && coinCount > 5 )
+        {
+            bulletAmount += 5;
+            coinCount -= 5;
+            maxBulletBuy--;
+            bulletText.GetComponent<Text>().text = "Bullet Left: " + bulletAmount.ToString();
+            buyBullettxt.GetComponent<Text>().text = maxBulletBuy.ToString() + " /5";
+        }
     }
 
 }
